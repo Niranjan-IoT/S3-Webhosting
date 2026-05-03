@@ -2,18 +2,18 @@ name: Deploy to S3 + CloudFront
 
 on:
   push:
-    branches: [main]       # trigger on push to main only
-  workflow_dispatch:       # also allow manual run from GitHub UI
+    branches: [main]
+  workflow_dispatch:
 
 env:
-  AWS_REGION: ap-south-1         # your bucket's region
-  S3_BUCKET: my-bucket-value-page  # replace with your bucket name
-  CF_DIST_ID: E1U2BWLCLVMD58  # replace with your distribution ID
+  AWS_REGION: ap-south-1
+  S3_BUCKET: my-bucket-value-page
+  CF_DIST_ID: E1U2BWLCLVMD58
 
 jobs:
   deploy:
     name: Deploy
-    runs-on: ubuntu-latest   # fresh VM every run
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
