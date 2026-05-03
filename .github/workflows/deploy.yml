@@ -10,6 +10,10 @@ env:
   S3_BUCKET: my-bucket-value-page
   CF_DIST_ID: E1U2BWLCLVMD58
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   deploy:
     name: Deploy
@@ -19,11 +23,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Configure AWS credentials
+      - name: Configure AWS credentials via OIDC
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          role-to-assume: arn:aws:iam::216938125797:role/GitHubActionsDeployRole
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Deploy to S3
