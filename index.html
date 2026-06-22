@@ -1,17 +1,1422 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My AWS Website</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Niranjan S — Cloud & DevOps Engineer. AWS, Kubernetes, Docker, Jenkins, GitHub Actions, GitOps, Infrastructure Automation. Open to internships and graduate programs.">
+<meta name="keywords" content="Cloud Engineer, DevOps Engineer, AWS Engineer, Kubernetes Engineer, Infrastructure Engineer, Platform Engineer, SRE, Site Reliability Engineer, Docker, Jenkins, Terraform, GitOps, Cloud Native, CI/CD, Linux, GitHub Actions, Prometheus, Grafana, Cloud Computing">
+<title>Niranjan S — Cloud & DevOps Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #050B18;
+    --bg2: #080F22;
+    --bg3: #0D1730;
+    --blue: #0EA5E9;
+    --cyan: #22D3EE;
+    --purple: #818CF8;
+    --green: #10B981;
+    --white: #F0F9FF;
+    --muted: #64748B;
+    --muted2: #94A3B8;
+    --glass: rgba(14,165,233,0.07);
+    --glass-border: rgba(14,165,233,0.18);
+    --card: rgba(13,23,48,0.85);
+    --radius: 12px;
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ─── SCROLLBAR ─── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 2px; }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 2.5rem;
+    backdrop-filter: blur(20px);
+    background: rgba(5,11,24,0.85);
+    border-bottom: 1px solid rgba(14,165,233,0.1);
+    transition: all 0.3s;
+  }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: -0.02em;
+    color: var(--white);
+  }
+  .nav-logo span { color: var(--cyan); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--muted2);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--cyan); }
+  .nav-cta {
+    background: linear-gradient(135deg, var(--blue), var(--cyan));
+    color: var(--bg) !important;
+    padding: 0.45rem 1.1rem;
+    border-radius: 6px;
+    font-weight: 600 !important;
+    font-size: 0.82rem !important;
+    text-decoration: none;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .nav-cta:hover { opacity: 0.9; transform: translateY(-1px); color: var(--bg) !important; }
+
+  /* ─── CANVAS BG ─── */
+  #bg-canvas {
+    position: fixed; inset: 0; z-index: 0;
+    pointer-events: none;
+  }
+
+  /* ─── SECTIONS ─── */
+  section { position: relative; z-index: 1; }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    padding: 7rem 2rem 4rem;
+    flex-direction: column;
+    text-align: center;
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--cyan);
+    border: 1px solid rgba(34,211,238,0.3);
+    padding: 0.35rem 0.9rem;
+    border-radius: 100px;
+    margin-bottom: 2rem;
+    background: rgba(34,211,238,0.05);
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--cyan);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
+  }
+  .hero-name {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #fff 0%, #C7E8FF 50%, var(--cyan) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    font-weight: 400;
+    color: var(--blue);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+  .hero-headline {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: var(--muted2);
+    max-width: 680px;
+    line-height: 1.7;
+    margin-bottom: 0.75rem;
+  }
+  .hero-sub {
+    font-size: 0.9rem;
+    color: var(--muted);
+    max-width: 580px;
+    margin-bottom: 2.5rem;
+    line-height: 1.7;
+  }
+  .hero-buttons {
+    display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+    margin-bottom: 3.5rem;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--blue), var(--cyan));
+    color: var(--bg);
+    padding: 0.75rem 1.75rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 0 30px rgba(14,165,233,0.3);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 50px rgba(14,165,233,0.5); }
+  .btn-secondary {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    color: var(--white);
+    padding: 0.75rem 1.75rem;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    text-decoration: none;
+    backdrop-filter: blur(10px);
+    transition: background 0.2s, transform 0.2s;
+  }
+  .btn-secondary:hover { background: rgba(14,165,233,0.12); transform: translateY(-2px); }
+  .btn-ghost {
+    color: var(--muted2);
+    padding: 0.75rem 1.75rem;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    text-decoration: none;
+    border: 1px solid rgba(100,116,139,0.3);
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .btn-ghost:hover { color: var(--white); border-color: var(--muted2); }
+
+  /* terminal block */
+  .terminal {
+    width: min(640px, 92vw);
+    background: rgba(8,15,34,0.95);
+    border: 1px solid rgba(14,165,233,0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 20px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(14,165,233,0.05);
+    margin-bottom: 4rem;
+    text-align: left;
+  }
+  .terminal-bar {
+    display: flex; align-items: center; gap: 0.5rem;
+    padding: 0.7rem 1rem;
+    background: rgba(14,165,233,0.06);
+    border-bottom: 1px solid rgba(14,165,233,0.12);
+  }
+  .terminal-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .terminal-dot.red { background: #FF5F57; }
+  .terminal-dot.yellow { background: #FEBC2E; }
+  .terminal-dot.green { background: #28C840; }
+  .terminal-title { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); margin-left: auto; }
+  .terminal-body { padding: 1.25rem 1.25rem 1.5rem; }
+  .terminal-line {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    margin-bottom: 0.5rem;
+    display: flex; gap: 0.6rem;
+  }
+  .t-prompt { color: var(--cyan); }
+  .t-cmd { color: var(--white); }
+  .t-out { color: var(--muted2); padding-left: 1.2rem; }
+  .t-green { color: var(--green); }
+  .t-blue { color: var(--blue); }
+  .cursor {
+    display: inline-block;
+    width: 8px; height: 14px;
+    background: var(--cyan);
+    margin-left: 2px;
+    vertical-align: middle;
+    animation: blink 1.1s step-end infinite;
+  }
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+  /* metrics strip */
+  .metrics {
+    display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center;
+  }
+  .metric-item {
+    display: flex; flex-direction: column; align-items: center;
+    padding: 1rem 1.5rem;
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
+    backdrop-filter: blur(10px);
+    min-width: 140px;
+  }
+  .metric-value {
+    font-family: var(--font-display);
+    font-size: 1.7rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--white), var(--cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .metric-label { font-size: 0.73rem; color: var(--muted2); margin-top: 0.2rem; text-align: center; line-height: 1.4; }
+
+  /* ─── SECTION COMMON ─── */
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+  .section-pad { padding: 5rem 0; }
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--cyan);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+  .section-desc {
+    color: var(--muted2);
+    font-size: 1rem;
+    max-width: 560px;
+    line-height: 1.7;
+    margin-bottom: 3rem;
+  }
+  .divider {
+    width: 48px; height: 2px;
+    background: linear-gradient(90deg, var(--blue), var(--cyan));
+    border-radius: 2px;
+    margin-bottom: 2.5rem;
+  }
+
+  /* ─── ABOUT ─── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  .about-text p { color: var(--muted2); line-height: 1.8; margin-bottom: 1rem; font-size: 0.97rem; }
+  .about-text p strong { color: var(--white); font-weight: 600; }
+  .about-stats {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+    margin-top: 2rem;
+  }
+  .stat-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
+    padding: 1.2rem;
+    transition: border-color 0.2s;
+  }
+  .stat-card:hover { border-color: var(--blue); }
+  .stat-card .num {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--cyan);
+  }
+  .stat-card .lbl { font-size: 0.8rem; color: var(--muted2); margin-top: 0.2rem; }
+  .about-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+  .pill {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    padding: 0.35rem 0.8rem;
+    border-radius: 100px;
+    background: rgba(14,165,233,0.1);
+    border: 1px solid rgba(14,165,233,0.25);
+    color: var(--blue);
+  }
+  .about-image-col {
+    display: flex; flex-direction: column; gap: 1rem;
+  }
+  .infra-card {
+    background: var(--card);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    backdrop-filter: blur(10px);
+  }
+  .infra-card h4 { font-family: var(--font-display); font-size: 0.95rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--white); }
+  .infra-card p { font-size: 0.82rem; color: var(--muted2); line-height: 1.6; }
+  .infra-tag { display: inline-block; font-family: var(--font-mono); font-size: 0.72rem; padding: 0.2rem 0.6rem; border-radius: 4px; margin-right: 0.4rem; margin-top: 0.5rem; }
+  .infra-tag.aws { background: rgba(255,153,0,0.12); color: #FF9900; border: 1px solid rgba(255,153,0,0.25); }
+  .infra-tag.k8s { background: rgba(50,108,229,0.12); color: #326CE5; border: 1px solid rgba(50,108,229,0.25); }
+  .infra-tag.ci { background: rgba(34,211,238,0.1); color: var(--cyan); border: 1px solid rgba(34,211,238,0.25); }
+  .infra-tag.iot { background: rgba(16,185,129,0.1); color: var(--green); border: 1px solid rgba(16,185,129,0.25); }
+
+  /* ─── SKILLS ─── */
+  .skills-bento {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+  .skill-cat {
+    background: var(--card);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    transition: border-color 0.3s, transform 0.3s;
+    backdrop-filter: blur(10px);
+  }
+  .skill-cat:hover { border-color: var(--blue); transform: translateY(-3px); }
+  .skill-cat.span2 { grid-column: span 2; }
+  .skill-cat-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+  .skill-cat-name {
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--cyan);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .skill-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .chip {
+    font-size: 0.76rem;
+    padding: 0.3rem 0.7rem;
+    border-radius: 6px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: var(--muted2);
+    transition: background 0.2s, color 0.2s;
+  }
+  .skill-cat:hover .chip { background: rgba(14,165,233,0.08); color: var(--white); border-color: rgba(14,165,233,0.2); }
+
+  /* ─── PROJECTS ─── */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  .project-card {
+    background: var(--card);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s;
+    backdrop-filter: blur(10px);
+  }
+  .project-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--blue), var(--cyan));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .project-card:hover { border-color: rgba(14,165,233,0.35); transform: translateY(-4px); }
+  .project-card:hover::before { opacity: 1; }
+  .project-num {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-bottom: 0.75rem;
+  }
+  .project-title {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+  }
+  .project-subtitle { font-size: 0.82rem; color: var(--muted2); margin-bottom: 1rem; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 1.25rem; }
+  .ptag {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    padding: 0.2rem 0.55rem;
+    border-radius: 4px;
+    background: rgba(14,165,233,0.1);
+    border: 1px solid rgba(14,165,233,0.2);
+    color: var(--blue);
+  }
+  .project-achievements { list-style: none; }
+  .project-achievements li {
+    font-size: 0.83rem;
+    color: var(--muted2);
+    padding: 0.3rem 0;
+    display: flex; gap: 0.6rem; align-items: flex-start;
+    line-height: 1.5;
+  }
+  .project-achievements li::before { content: '▸'; color: var(--cyan); flex-shrink: 0; margin-top: 0.1rem; }
+  .project-link {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-size: 0.8rem;
+    color: var(--blue);
+    text-decoration: none;
+    margin-top: 1rem;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .project-link:hover { color: var(--cyan); }
+
+  /* ─── PATENT ─── */
+  .patent-block {
+    background: linear-gradient(135deg, rgba(14,165,233,0.06) 0%, rgba(129,140,248,0.06) 100%);
+    border: 1px solid rgba(129,140,248,0.25);
+    border-radius: 16px;
+    padding: 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .patent-block::before {
+    content: '';
+    position: absolute; top: -80px; right: -80px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(129,140,248,0.12) 0%, transparent 70%);
+  }
+  .patent-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--purple);
+    border: 1px solid rgba(129,140,248,0.3);
+    padding: 0.35rem 0.8rem;
+    border-radius: 100px;
+    margin-bottom: 1rem;
+    background: rgba(129,140,248,0.08);
+  }
+  .patent-title {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 700;
+    line-height: 1.35;
+    margin-bottom: 0.75rem;
+    color: var(--white);
+  }
+  .patent-id {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--muted2);
+    margin-bottom: 1.25rem;
+  }
+  .patent-id span { color: var(--cyan); }
+  .patent-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .patent-pill {
+    font-size: 0.78rem;
+    padding: 0.35rem 0.85rem;
+    border-radius: 100px;
+    background: rgba(129,140,248,0.1);
+    border: 1px solid rgba(129,140,248,0.2);
+    color: var(--purple);
+  }
+  .patent-right { display: flex; flex-direction: column; gap: 1rem; }
+  .patent-feat {
+    display: flex; gap: 1rem; align-items: flex-start;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 10px;
+    padding: 1rem;
+  }
+  .patent-feat-icon { font-size: 1.2rem; flex-shrink: 0; }
+  .patent-feat-text h5 { font-size: 0.88rem; font-weight: 600; color: var(--white); margin-bottom: 0.2rem; }
+  .patent-feat-text p { font-size: 0.78rem; color: var(--muted2); line-height: 1.5; }
+
+  /* ─── TIMELINE ─── */
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, var(--blue) 0%, var(--purple) 50%, transparent 100%);
+  }
+  .tl-item {
+    position: relative;
+    padding-left: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+  .tl-item::before {
+    content: '';
+    position: absolute; left: -2.43rem; top: 0.35rem;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--blue);
+    border: 2px solid var(--bg);
+    box-shadow: 0 0 12px var(--blue);
+  }
+  .tl-year {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--cyan);
+    margin-bottom: 0.35rem;
+    letter-spacing: 0.08em;
+  }
+  .tl-title {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 0.3rem;
+  }
+  .tl-desc { font-size: 0.83rem; color: var(--muted2); line-height: 1.6; max-width: 480px; }
+
+  /* ─── ACHIEVEMENTS ─── */
+  .ach-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+  .ach-card {
+    background: var(--card);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    display: flex; align-items: flex-start; gap: 1rem;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .ach-card:hover { border-color: var(--blue); transform: translateY(-3px); }
+  .ach-icon { font-size: 1.4rem; flex-shrink: 0; }
+  .ach-text h4 { font-family: var(--font-display); font-size: 0.9rem; font-weight: 600; color: var(--white); margin-bottom: 0.25rem; line-height: 1.3; }
+  .ach-text p { font-size: 0.78rem; color: var(--muted2); line-height: 1.5; }
+
+  /* ─── WHY HIRE ─── */
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+  .why-card {
+    background: var(--card);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    text-align: center;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .why-card:hover { border-color: var(--cyan); transform: translateY(-3px); }
+  .why-icon { font-size: 1.6rem; margin-bottom: 0.75rem; }
+  .why-title { font-family: var(--font-display); font-size: 0.88rem; font-weight: 600; color: var(--white); margin-bottom: 0.4rem; }
+  .why-desc { font-size: 0.77rem; color: var(--muted2); line-height: 1.5; }
+
+  /* ─── CONTACT ─── */
+  .contact-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  .contact-info h2 {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin-bottom: 1rem;
+  }
+  .contact-info p { color: var(--muted2); line-height: 1.7; margin-bottom: 1.5rem; font-size: 0.93rem; }
+  .contact-links { display: flex; flex-direction: column; gap: 0.75rem; }
+  .contact-link {
+    display: flex; align-items: center; gap: 0.75rem;
+    color: var(--muted2);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+  }
+  .contact-link:hover { color: var(--cyan); }
+  .contact-link-icon {
+    width: 36px; height: 36px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+  .contact-socials { display: flex; gap: 1rem; margin-top: 1.5rem; }
+  .social-btn {
+    display: flex; align-items: center; gap: 0.5rem;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    border: 1px solid var(--glass-border);
+    background: var(--glass);
+    color: var(--white);
+    transition: background 0.2s, border-color 0.2s, transform 0.2s;
+  }
+  .social-btn:hover { background: rgba(14,165,233,0.12); border-color: var(--blue); transform: translateY(-2px); }
+  .availability-card {
+    background: var(--card);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
+    padding: 2rem;
+  }
+  .availability-card h3 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .availability-card p { font-size: 0.85rem; color: var(--muted2); line-height: 1.7; margin-bottom: 1.5rem; }
+  .role-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .role-chip {
+    font-size: 0.75rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 100px;
+    background: rgba(16,185,129,0.08);
+    border: 1px solid rgba(16,185,129,0.2);
+    color: var(--green);
+  }
+  .open-dot {
+    display: inline-block;
+    width: 8px; height: 8px;
+    background: var(--green);
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    animation: pulse 2s infinite;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 2rem;
+    text-align: center;
+    border-top: 1px solid rgba(14,165,233,0.1);
+    color: var(--muted);
+    font-size: 0.8rem;
+  }
+  footer span { color: var(--cyan); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    nav { padding: 0.9rem 1.25rem; }
+    .nav-links { display: none; }
+    .about-grid, .contact-wrap, .patent-block { grid-template-columns: 1fr; gap: 2rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .skills-bento { grid-template-columns: 1fr 1fr; }
+    .skill-cat.span2 { grid-column: span 1; }
+    .ach-grid { grid-template-columns: 1fr 1fr; }
+    .why-grid { grid-template-columns: 1fr 1fr; }
+    .section-pad { padding: 3.5rem 0; }
+    .hero-buttons { flex-direction: column; align-items: center; }
+  }
+  @media (max-width: 480px) {
+    .skills-bento, .ach-grid, .why-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ─── ANIMATION HELPERS ─── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s, transform 0.6s;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+</style>
 </head>
 <body>
-  <div class="container">
-    <h1>Hello from AWS S3!</h1>
-    <p>This website is hosted on Amazon S3.</p>
-    <p>No server. No cost. 99.9% uptime.</p>
+
+<!-- Background Canvas -->
+<canvas id="bg-canvas"></canvas>
+
+<!-- Navigation -->
+<nav>
+  <div class="nav-logo">niranjan<span>.</span>dev</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#patent">Patent</a></li>
+    <li><a href="#timeline">Journey</a></li>
+    <li><a href="#contact" class="nav-cta">Hire Me</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-eyebrow">Available for Opportunities in 2025–26</div>
+  <h1 class="hero-name">Niranjan S</h1>
+  <p class="hero-title">Cloud &amp; DevOps Engineer</p>
+  <p class="hero-headline">Building Scalable Cloud Infrastructure, Kubernetes Platforms, and Automated CI/CD Pipelines for Modern Applications.</p>
+  <p class="hero-sub">Computer Science Engineer passionate about AWS, Kubernetes, DevOps, Cloud Architecture, Infrastructure Automation, GitOps, and Site Reliability Engineering.</p>
+
+  <div class="hero-buttons">
+    <a href="#projects" class="btn-primary">View Projects</a>
+    <a href="mailto:niranjanzzz55@gmail.com?subject=Resume Request" class="btn-secondary">Download Resume</a>
+    <a href="#contact" class="btn-ghost">Contact Me</a>
   </div>
-  <script src="app.js"></script>
+
+  <!-- Terminal -->
+  <div class="terminal fade-up" id="terminal-block">
+    <div class="terminal-bar">
+      <div class="terminal-dot red"></div>
+      <div class="terminal-dot yellow"></div>
+      <div class="terminal-dot green"></div>
+      <div class="terminal-title">niranjan@cloud-workstation ~ zsh</div>
+    </div>
+    <div class="terminal-body" id="terminal-output"></div>
+  </div>
+
+  <!-- Metrics -->
+  <div class="metrics fade-up">
+    <div class="metric-item">
+      <div class="metric-value" data-target="90">0%</div>
+      <div class="metric-label">Deployment<br>Automation</div>
+    </div>
+    <div class="metric-item">
+      <div class="metric-value" data-target="70">0%</div>
+      <div class="metric-label">Faster<br>Release Cycle</div>
+    </div>
+    <div class="metric-item">
+      <div class="metric-value">AWS</div>
+      <div class="metric-label">Production-Grade<br>Infrastructure</div>
+    </div>
+    <div class="metric-item">
+      <div class="metric-value">1</div>
+      <div class="metric-label">Patent<br>Filed</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="section-pad">
+  <div class="container">
+    <div class="about-grid fade-up">
+      <div class="about-text">
+        <div class="section-label">// About</div>
+        <h2 class="section-title">Engineering the Cloud,<br>One Pipeline at a Time</h2>
+        <div class="divider"></div>
+        <p>I'm an aspiring <strong>Cloud &amp; DevOps Engineer</strong> pursuing B.E. Computer Science &amp; Engineering at K.L.N. College of Engineering, Madurai (Anna University, 2023–2027), with a CGPA of 7.8.</p>
+        <p>I specialize in <strong>designing cloud-native infrastructure, automating software delivery pipelines</strong>, and implementing modern DevOps practices that reduce operational overhead and accelerate release velocity.</p>
+        <p>With hands-on experience in <strong>AWS cloud services</strong>, Linux administration, Docker containerization, GitHub Actions, Jenkins CI/CD, and GitOps methodologies — I build systems that are scalable, secure, and highly available.</p>
+        <p>Outside of cloud work, I'm a <strong>patent applicant</strong> for an offline AI-enabled smart waste segregation device — demonstrating applied research, edge computing, and embedded ML innovation.</p>
+        <div class="about-pills">
+          <span class="pill">AWS</span>
+          <span class="pill">Docker</span>
+          <span class="pill">Jenkins</span>
+          <span class="pill">GitHub Actions</span>
+          <span class="pill">GitOps</span>
+          <span class="pill">Linux</span>
+          <span class="pill">Python</span>
+          <span class="pill">IoT / Edge AI</span>
+        </div>
+      </div>
+      <div class="about-image-col">
+        <div class="about-stats">
+          <div class="stat-card"><div class="num">3+</div><div class="lbl">Production Projects</div></div>
+          <div class="stat-card"><div class="num">7.8</div><div class="lbl">CGPA / Anna University</div></div>
+          <div class="stat-card"><div class="num">1</div><div class="lbl">Patent Filed</div></div>
+          <div class="stat-card"><div class="num">2026</div><div class="lbl">Active Builder</div></div>
+        </div>
+        <div class="infra-card">
+          <h4>🏗️ Current Stack</h4>
+          <p>Actively working with production-grade AWS infrastructure, GitOps pipelines, and container orchestration.</p>
+          <span class="infra-tag aws">AWS</span>
+          <span class="infra-tag k8s">Kubernetes</span>
+          <span class="infra-tag ci">GitHub Actions</span>
+          <span class="infra-tag iot">IoT / Edge</span>
+        </div>
+        <div class="infra-card">
+          <h4>📍 Location &amp; Status</h4>
+          <p>Madurai, Tamil Nadu, India.<br><span class="open-dot"></span>Open to internships, graduate programs, and Cloud/DevOps roles — remote or on-site.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="section-pad" style="background: rgba(8,15,34,0.5);">
+  <div class="container">
+    <div class="fade-up">
+      <div class="section-label">// Technical Skills</div>
+      <h2 class="section-title">Full-Stack Cloud &amp; DevOps Toolkit</h2>
+      <p class="section-desc">A production-oriented skill set built through real projects and continuous learning.</p>
+    </div>
+    <div class="skills-bento fade-up">
+      <div class="skill-cat">
+        <div class="skill-cat-icon">☁️</div>
+        <div class="skill-cat-name">Cloud · AWS</div>
+        <div class="skill-chips">
+          <span class="chip">AWS</span><span class="chip">EC2</span><span class="chip">S3</span>
+          <span class="chip">CloudFront</span><span class="chip">Route 53</span><span class="chip">IAM</span>
+          <span class="chip">VPC</span><span class="chip">CloudFormation</span><span class="chip">ACM</span>
+        </div>
+      </div>
+      <div class="skill-cat span2">
+        <div class="skill-cat-icon">⚙️</div>
+        <div class="skill-cat-name">DevOps &amp; Automation</div>
+        <div class="skill-chips">
+          <span class="chip">Docker</span><span class="chip">Kubernetes</span><span class="chip">Jenkins</span>
+          <span class="chip">GitHub Actions</span><span class="chip">GitOps</span><span class="chip">Terraform</span>
+          <span class="chip">Helm</span><span class="chip">ArgoCD</span><span class="chip">OIDC</span>
+          <span class="chip">Jenkinsfile</span><span class="chip">Pipeline as Code</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-icon">🐧</div>
+        <div class="skill-cat-name">Operating Systems</div>
+        <div class="skill-chips">
+          <span class="chip">Linux</span><span class="chip">Ubuntu Server</span><span class="chip">Bash</span>
+          <span class="chip">Shell Scripting</span><span class="chip">WinSCP</span><span class="chip">PuTTY</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-icon">🌐</div>
+        <div class="skill-cat-name">Networking</div>
+        <div class="skill-chips">
+          <span class="chip">TCP/IP</span><span class="chip">DNS</span><span class="chip">HTTP/S</span>
+          <span class="chip">Load Balancing</span><span class="chip">Reverse Proxy</span><span class="chip">VPC Networking</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-icon">💻</div>
+        <div class="skill-cat-name">Programming</div>
+        <div class="skill-chips">
+          <span class="chip">Python</span><span class="chip">Java</span><span class="chip">C</span>
+          <span class="chip">Bash</span><span class="chip">YAML</span><span class="chip">HTML/CSS</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-icon">📊</div>
+        <div class="skill-cat-name">Monitoring &amp; Observability</div>
+        <div class="skill-chips">
+          <span class="chip">Prometheus</span><span class="chip">Grafana</span><span class="chip">ELK Stack</span>
+          <span class="chip">Tableau</span><span class="chip">Power BI</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-icon">🔌</div>
+        <div class="skill-cat-name">IoT &amp; Embedded</div>
+        <div class="skill-chips">
+          <span class="chip">ESP32</span><span class="chip">Raspberry Pi</span><span class="chip">Arduino</span>
+          <span class="chip">MQTT</span><span class="chip">LoRa</span><span class="chip">GPS</span>
+          <span class="chip">Node-RED</span><span class="chip">Edge AI</span>
+        </div>
+      </div>
+      <div class="skill-cat span2">
+        <div class="skill-cat-icon">🗄️</div>
+        <div class="skill-cat-name">Version Control &amp; Databases</div>
+        <div class="skill-chips">
+          <span class="chip">Git</span><span class="chip">GitHub</span><span class="chip">Webhooks</span>
+          <span class="chip">MySQL</span><span class="chip">DBMS Fundamentals</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="section-pad">
+  <div class="container">
+    <div class="fade-up">
+      <div class="section-label">// Projects</div>
+      <h2 class="section-title">Production-Grade Engineering</h2>
+      <p class="section-desc">Real infrastructure. Real automation. Built and deployed, not just studied.</p>
+    </div>
+    <div class="projects-grid fade-up">
+
+      <!-- P1 -->
+      <div class="project-card">
+        <div class="project-num">01 · AWS · Production</div>
+        <div class="project-title">AWS Serverless Static Website Deployment</div>
+        <div class="project-subtitle">Live: niruclouddev.in</div>
+        <div class="project-tags">
+          <span class="ptag">S3</span><span class="ptag">CloudFront</span><span class="ptag">Route 53</span>
+          <span class="ptag">ACM</span><span class="ptag">IAM</span><span class="ptag">GitHub Actions</span><span class="ptag">OIDC</span>
+        </div>
+        <ul class="project-achievements">
+          <li>Production-grade serverless architecture — zero server management, globally distributed via CDN</li>
+          <li>Keyless CI/CD with GitHub Actions + OpenID Connect, eliminating long-lived AWS credentials</li>
+          <li>S3 origin secured via CloudFront OAC, preventing direct public bucket access</li>
+          <li>IAM least-privilege model scoped to exact bucket and distribution ARNs</li>
+          <li>5+ manual steps reduced to a fully automated pipeline completing in under 2 minutes</li>
+        </ul>
+        <a href="https://niruclouddev.in" class="project-link" target="_blank">→ niruclouddev.in</a>
+      </div>
+
+      <!-- P2 -->
+      <div class="project-card">
+        <div class="project-num">02 · DevOps · Automation</div>
+        <div class="project-title">GitOps Zero-Touch Deployment Pipeline</div>
+        <div class="project-subtitle">Continuous Delivery · Pipeline as Code</div>
+        <div class="project-tags">
+          <span class="ptag">GitHub</span><span class="ptag">Jenkins</span><span class="ptag">Docker</span><span class="ptag">Linux</span><span class="ptag">Webhooks</span>
+        </div>
+        <ul class="project-achievements">
+          <li>GitOps-based CI/CD pipeline collapsing 5 manual steps into a single git push</li>
+          <li>Webhook-triggered builds achieving zero-touch, error-free release cycles</li>
+          <li>Structured pipeline stages with documented runbooks for reproducible delivery</li>
+          <li>Jenkinsfile pipeline-as-code version-controlled alongside application source</li>
+          <li>Deployment time reduced by ~70% — quantified and measured in production</li>
+        </ul>
+      </div>
+
+      <!-- P3 -->
+      <div class="project-card">
+        <div class="project-num">03 · IoT · Healthcare &amp; Defense</div>
+        <div class="project-title">Smart SOS Detection &amp; Rescue System</div>
+        <div class="project-subtitle">Academic Project · 2025</div>
+        <div class="project-tags">
+          <span class="ptag">ESP32</span><span class="ptag">MQTT</span><span class="ptag">GPS</span><span class="ptag">LoRa</span><span class="ptag">IoT</span><span class="ptag">Edge AI</span>
+        </div>
+        <ul class="project-achievements">
+          <li>IoT emergency device with biometric sensors + GPS for real-time health anomaly detection</li>
+          <li>LoRa communication for long-range, low-power transmission beyond cellular limits</li>
+          <li>MPU-6050 accelerometer/gyroscope for fall detection with embedded edge decision-making</li>
+          <li>Efficient telemetry transfer via MQTT — deployed for healthcare, disaster response, defense</li>
+        </ul>
+      </div>
+
+      <!-- P4 -->
+      <div class="project-card">
+        <div class="project-num">04 · Kubernetes · Platform Engineering</div>
+        <div class="project-title">Kubernetes Production Platform</div>
+        <div class="project-subtitle">Container Orchestration &amp; Observability</div>
+        <div class="project-tags">
+          <span class="ptag">Kubernetes</span><span class="ptag">Docker</span><span class="ptag">Helm</span><span class="ptag">Prometheus</span><span class="ptag">Grafana</span>
+        </div>
+        <ul class="project-achievements">
+          <li>Full container orchestration with rolling updates and zero-downtime deployments</li>
+          <li>Auto-healing deployments — Kubernetes self-recovery without manual intervention</li>
+          <li>Horizontal Pod Autoscaling based on load metrics</li>
+          <li>Full-stack monitoring and observability with Prometheus + Grafana dashboards</li>
+          <li>Secrets management using Kubernetes native secrets with RBAC policies</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PATENT -->
+<section id="patent" class="section-pad" style="background: rgba(8,15,34,0.5);">
+  <div class="container">
+    <div class="fade-up">
+      <div class="section-label">// Innovation</div>
+      <h2 class="section-title">Research &amp; Patents</h2>
+      <p class="section-desc">Going beyond coursework — turning engineering ideas into documented innovation.</p>
+    </div>
+    <div class="patent-block fade-up">
+      <div>
+        <div class="patent-badge">🏛️ Patent Application Filed</div>
+        <h3 class="patent-title">Sustainable Sanitation Innovation: Design and Development of an Offline AI-Enabled Smart Waste Segregation Device</h3>
+        <p class="patent-id">Application No: <span>202641046590</span> &nbsp;·&nbsp; Status: Filed</p>
+        <div class="patent-pills">
+          <span class="patent-pill">Offline AI Inference</span>
+          <span class="patent-pill">Edge Computing</span>
+          <span class="patent-pill">Embedded Systems</span>
+          <span class="patent-pill">Machine Learning</span>
+          <span class="patent-pill">Sustainable Technology</span>
+          <span class="patent-pill">Applied Research</span>
+        </div>
+      </div>
+      <div class="patent-right">
+        <div class="patent-feat">
+          <div class="patent-feat-icon">🤖</div>
+          <div class="patent-feat-text">
+            <h5>Offline AI Inference</h5>
+            <p>Locally deployed ML model classifies waste (wet/dry/hazardous) without any internet connectivity.</p>
+          </div>
+        </div>
+        <div class="patent-feat">
+          <div class="patent-feat-icon">💡</div>
+          <div class="patent-feat-text">
+            <h5>Edge-First Architecture</h5>
+            <p>Complete AI inference pipeline on embedded hardware with low-power, offline operation.</p>
+          </div>
+        </div>
+        <div class="patent-feat">
+          <div class="patent-feat-icon">🌱</div>
+          <div class="patent-feat-text">
+            <h5>Sustainable Technology</h5>
+            <p>Addresses real-world sanitation challenges through hardware, AI, and systems engineering.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section id="timeline" class="section-pad">
+  <div class="container">
+    <div class="fade-up">
+      <div class="section-label">// Journey</div>
+      <h2 class="section-title">Engineering Timeline</h2>
+      <p class="section-desc">From first commit to production infrastructure — a journey of continuous building.</p>
+    </div>
+    <div class="timeline fade-up">
+      <div class="tl-item">
+        <div class="tl-year">2023</div>
+        <div class="tl-title">Started B.E. Computer Science &amp; Engineering</div>
+        <div class="tl-desc">Enrolled at K.L.N. College of Engineering, Sivagangai under Anna University. Specialization in IoT. Began exploring cloud infrastructure and embedded systems from semester one.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2024</div>
+        <div class="tl-title">IoT Automation Workshop at IIT Madras</div>
+        <div class="tl-desc">Attended Top Engineers workshop at IIT Madras covering IoT automation with Raspberry Pi and Node-RED. Expanded hardware-software integration skills.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2025</div>
+        <div class="tl-title">Smart SOS Detection &amp; Rescue System</div>
+        <div class="tl-desc">Built a multi-sensor IoT emergency device using ESP32, LoRa, GPS, and MQTT. Deployed for healthcare, disaster response, and defense scenarios. Presented at TECHOMIND-2K25 national exhibition.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2026</div>
+        <div class="tl-title">Patent Filed · Offline AI Smart Waste Segregation</div>
+        <div class="tl-desc">Filed patent application No. 202641046590 for an edge-AI embedded device classifying waste without internet connectivity. Demonstrates applied research and innovation capability.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2026</div>
+        <div class="tl-title">AWS Serverless Production Infrastructure</div>
+        <div class="tl-desc">Designed and deployed production-grade serverless architecture on AWS. Implemented keyless OIDC-based CI/CD pipeline. Live at niruclouddev.in with automated deployments on every git push.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2026</div>
+        <div class="tl-title">GitOps Deployment Automation Pipeline</div>
+        <div class="tl-desc">Engineered a fully automated zero-touch CI/CD pipeline using Jenkins and GitHub, reducing deployment time by 70%. Implemented pipeline-as-code via Jenkinsfile.</div>
+      </div>
+      <div class="tl-item" style="padding-bottom: 0;">
+        <div class="tl-year" style="color: var(--purple);">2027 →</div>
+        <div class="tl-title" style="color: var(--purple);">Cloud Architect &amp; Platform Engineer</div>
+        <div class="tl-desc">Targeting roles in Cloud Architecture, Platform Engineering, SRE, and Kubernetes-focused infrastructure at high-growth product companies and top-tier enterprises.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements" class="section-pad" style="background: rgba(8,15,34,0.5);">
+  <div class="container">
+    <div class="fade-up">
+      <div class="section-label">// Achievements</div>
+      <h2 class="section-title">Certifications &amp; Recognition</h2>
+      <p class="section-desc">Building credentials alongside real-world experience.</p>
+    </div>
+    <div class="ach-grid fade-up">
+      <div class="ach-card">
+        <div class="ach-icon">🏆</div>
+        <div class="ach-text">
+          <h4>Patent Applicant</h4>
+          <p>Application No. 202641046590 — Offline AI Smart Waste Segregation Device</p>
+        </div>
+      </div>
+      <div class="ach-card">
+        <div class="ach-icon">☁️</div>
+        <div class="ach-text">
+          <h4>AWS Cloud Practitioner</h4>
+          <p>Certification in progress — actively studying for CLF-C02 foundational exam</p>
+        </div>
+      </div>
+      <div class="ach-card">
+        <div class="ach-icon">🎓</div>
+        <div class="ach-text">
+          <h4>IoT Workshop · IIT Madras</h4>
+          <p>Top Engineers program — IoT Automation with Raspberry Pi and Node-RED</p>
+        </div>
+      </div>
+      <div class="ach-card">
+        <div class="ach-icon">🏅</div>
+        <div class="ach-text">
+          <h4>TECHOMIND-2K25</h4>
+          <p>National Level Technical Project Exhibition — Karpagam Institute of Technology, Coimbatore</p>
+        </div>
+      </div>
+      <div class="ach-card">
+        <div class="ach-icon">📊</div>
+        <div class="ach-text">
+          <h4>Data Visualization</h4>
+          <p>Tableau &amp; Power BI certification via Karam Academy</p>
+        </div>
+      </div>
+      <div class="ach-card">
+        <div class="ach-icon">📝</div>
+        <div class="ach-text">
+          <h4>Yuvasakthi 2026</h4>
+          <p>National Level Technical Symposium — Paper Presentation, Anna University</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY HIRE ME -->
+<section id="why" class="section-pad">
+  <div class="container">
+    <div class="fade-up">
+      <div class="section-label">// Recruiter View</div>
+      <h2 class="section-title">Why Hire Niranjan?</h2>
+      <p class="section-desc">What sets a builder apart from a learner — real projects, real results, real mindset.</p>
+    </div>
+    <div class="why-grid fade-up">
+      <div class="why-card">
+        <div class="why-icon">☁️</div>
+        <div class="why-title">Strong Cloud Fundamentals</div>
+        <div class="why-desc">Hands-on AWS with production deployments at niruclouddev.in — not just sandbox experimentation</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🔁</div>
+        <div class="why-title">CI/CD Automation Expertise</div>
+        <div class="why-desc">GitHub Actions OIDC + Jenkins pipelines that eliminate manual steps and deliver measurable speed gains</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🛡️</div>
+        <div class="why-title">Security-First Thinking</div>
+        <div class="why-desc">IAM least-privilege, OIDC keyless auth, CloudFront OAC — security is baked in, not bolted on</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🧠</div>
+        <div class="why-title">DevOps Mindset</div>
+        <div class="why-desc">Treats infrastructure as code, delivery as a pipeline, and reliability as a shared responsibility</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">📐</div>
+        <div class="why-title">Infrastructure Automation</div>
+        <div class="why-desc">CloudFormation, Jenkinsfile, and GitOps workflows that scale beyond the individual engineer</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🔬</div>
+        <div class="why-title">Proven Innovator</div>
+        <div class="why-desc">Filed a patent as an undergraduate — demonstrates research depth and applied engineering initiative</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">📈</div>
+        <div class="why-title">Continuous Learning</div>
+        <div class="why-desc">AWS Cloud Practitioner in progress, GCP labs, and a growing stack — consistently upskilling ahead of the curve</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🚀</div>
+        <div class="why-title">Cloud-Native Passion</div>
+        <div class="why-desc">Kubernetes, GitOps, ArgoCD — aligned with where enterprise infrastructure is heading right now</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section-pad" style="background: rgba(8,15,34,0.5);">
+  <div class="container">
+    <div class="contact-wrap fade-up">
+      <div class="contact-info">
+        <div class="section-label">// Contact</div>
+        <h2>Let's Build<br>Something Together</h2>
+        <p>Open to <strong style="color: var(--white)">internships, graduate programs, Cloud Engineer, DevOps Engineer, SRE, Infrastructure Engineer, Platform Engineer, and Kubernetes-focused opportunities</strong> — remote or on-site.</p>
+        <div class="contact-links">
+          <a href="mailto:niranjanzzz55@gmail.com" class="contact-link">
+            <div class="contact-link-icon">✉️</div>
+            niranjanzzz55@gmail.com
+          </a>
+          <a href="tel:+918610848749" class="contact-link">
+            <div class="contact-link-icon">📞</div>
+            +91 8610848749
+          </a>
+          <a href="#" class="contact-link">
+            <div class="contact-link-icon">📍</div>
+            Madurai, Tamil Nadu, India
+          </a>
+        </div>
+        <div class="contact-socials">
+          <a href="https://github.com/Niranjan-IoT" class="social-btn" target="_blank">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            GitHub
+          </a>
+          <a href="https://linkedin.com/in/niranjan-s" class="social-btn" target="_blank">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            LinkedIn
+          </a>
+        </div>
+      </div>
+      <div class="availability-card">
+        <h3><span class="open-dot"></span>Open to Opportunities</h3>
+        <p>I'm actively seeking roles where I can contribute to cloud infrastructure, DevOps automation, and platform engineering. Let's connect if you're building something meaningful.</p>
+        <div class="role-chips">
+          <span class="role-chip">Cloud Engineer</span>
+          <span class="role-chip">DevOps Engineer</span>
+          <span class="role-chip">SRE</span>
+          <span class="role-chip">Platform Engineer</span>
+          <span class="role-chip">Infrastructure Engineer</span>
+          <span class="role-chip">Kubernetes Engineer</span>
+          <span class="role-chip">AWS Engineer</span>
+          <span class="role-chip">Internship</span>
+          <span class="role-chip">Graduate Program</span>
+        </div>
+        <div style="margin-top: 2rem; padding: 1.25rem; background: rgba(14,165,233,0.05); border: 1px solid rgba(14,165,233,0.15); border-radius: 8px;">
+          <p style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted2); margin-bottom: 0;">
+            <span style="color: var(--cyan);">$</span> Preferred location: Remote / Hybrid / Madurai / Chennai / Bengaluru<br>
+            <span style="color: var(--cyan);">$</span> Available: Immediately for internships
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Designed &amp; built by <span>Niranjan S</span> · Cloud &amp; DevOps Engineer · Madurai, Tamil Nadu</p>
+  <p style="margin-top: 0.4rem; color: #334155;">© 2026 · niranjanzzz55@gmail.com</p>
+</footer>
+
+<script>
+// ─── PARTICLE CANVAS ───
+const canvas = document.getElementById('bg-canvas');
+const ctx = canvas.getContext('2d');
+let W, H, particles = [];
+
+function resize() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+
+class Particle {
+  constructor() { this.reset(); }
+  reset() {
+    this.x = Math.random() * W;
+    this.y = Math.random() * H;
+    this.vx = (Math.random() - 0.5) * 0.3;
+    this.vy = (Math.random() - 0.5) * 0.3;
+    this.r = Math.random() * 1.5 + 0.5;
+    this.alpha = Math.random() * 0.4 + 0.1;
+  }
+  update() {
+    this.x += this.vx; this.y += this.vy;
+    if (this.x < 0 || this.x > W || this.y < 0 || this.y > H) this.reset();
+  }
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(14,165,233,${this.alpha})`;
+    ctx.fill();
+  }
+}
+
+function initParticles() {
+  particles = Array.from({length: 80}, () => new Particle());
+}
+
+function drawConnections() {
+  for (let i = 0; i < particles.length; i++) {
+    for (let j = i + 1; j < particles.length; j++) {
+      const dx = particles[i].x - particles[j].x;
+      const dy = particles[i].y - particles[j].y;
+      const d = Math.sqrt(dx*dx + dy*dy);
+      if (d < 120) {
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(particles[j].x, particles[j].y);
+        ctx.strokeStyle = `rgba(14,165,233,${0.06 * (1 - d/120)})`;
+        ctx.lineWidth = 0.5;
+        ctx.stroke();
+      }
+    }
+  }
+}
+
+function loop() {
+  ctx.clearRect(0, 0, W, H);
+  particles.forEach(p => { p.update(); p.draw(); });
+  drawConnections();
+  requestAnimationFrame(loop);
+}
+
+resize(); initParticles(); loop();
+window.addEventListener('resize', () => { resize(); initParticles(); });
+
+// ─── TERMINAL TYPING ───
+const lines = [
+  { type: 'cmd', prompt: '~', text: 'kubectl get nodes' },
+  { type: 'out', text: 'NAME              STATUS   ROLES    AGE   VERSION', color: 'muted' },
+  { type: 'out', text: 'niranjan-node-1   Ready    master   42d   v1.29.0', color: 'green' },
+  { type: 'cmd', prompt: '~', text: 'git push origin main' },
+  { type: 'out', text: '✓ Triggered: GitHub Actions CI/CD pipeline', color: 'green' },
+  { type: 'out', text: '✓ Deployed to AWS S3 + CloudFront invalidated', color: 'green' },
+  { type: 'cmd', prompt: '~', text: 'aws cloudformation describe-stacks --stack-name prod', },
+  { type: 'out', text: 'StackStatus: CREATE_COMPLETE', color: 'blue' },
+  { type: 'cursor' }
+];
+
+const termOutput = document.getElementById('terminal-output');
+let lineIdx = 0, charIdx = 0;
+let currentEl = null;
+
+function typeNext() {
+  if (lineIdx >= lines.length) return;
+  const line = lines[lineIdx];
+
+  if (line.type === 'cursor') {
+    const el = document.createElement('div');
+    el.className = 'terminal-line';
+    el.innerHTML = `<span class="t-prompt">❯</span><span class="cursor"></span>`;
+    termOutput.appendChild(el);
+    return;
+  }
+
+  if (charIdx === 0) {
+    currentEl = document.createElement('div');
+    currentEl.className = 'terminal-line';
+    if (line.type === 'cmd') {
+      currentEl.innerHTML = `<span class="t-prompt">❯</span><span class="t-cmd"></span>`;
+    } else {
+      const cls = line.color === 'green' ? 't-green' : line.color === 'blue' ? 't-blue' : 't-out';
+      currentEl.innerHTML = `<span class="${cls}"></span>`;
+    }
+    termOutput.appendChild(currentEl);
+  }
+
+  const target = currentEl.querySelector('.t-cmd, .t-out, .t-green, .t-blue');
+  if (target && charIdx < line.text.length) {
+    target.textContent += line.text[charIdx];
+    charIdx++;
+    setTimeout(typeNext, line.type === 'cmd' ? 45 : 18);
+  } else {
+    charIdx = 0; lineIdx++;
+    setTimeout(typeNext, lineIdx < lines.length ? 300 : 0);
+  }
+}
+
+setTimeout(typeNext, 800);
+
+// ─── SCROLL ANIMATIONS ───
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// ─── COUNTER ANIMATION ───
+function animateCounter(el, target) {
+  let current = 0;
+  const step = target / 50;
+  const interval = setInterval(() => {
+    current = Math.min(current + step, target);
+    el.textContent = Math.floor(current) + '%';
+    if (current >= target) clearInterval(interval);
+  }, 30);
+}
+
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const els = e.target.querySelectorAll('[data-target]');
+      els.forEach(el => animateCounter(el, parseInt(el.dataset.target)));
+      counterObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.5 });
+
+const metricsSection = document.querySelector('.metrics');
+if (metricsSection) counterObserver.observe(metricsSection);
+
+// ─── NAV ACTIVE ───
+window.addEventListener('scroll', () => {
+  const nav = document.querySelector('nav');
+  nav.style.background = window.scrollY > 50 ? 'rgba(5,11,24,0.97)' : 'rgba(5,11,24,0.85)';
+});
+</script>
 </body>
 </html>
